@@ -10,7 +10,7 @@ namespace stackoverflow.Helper
 {
     public class PasswordEncryptor
     {
-        public static string ComputeHash(string plainText, byte[] saltBytes)
+        public static string ComputeHash(string plainText, byte[] saltBytes = null)
         {
             // If salt is not specified, generate it.
             if (saltBytes == null)

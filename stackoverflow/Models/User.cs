@@ -25,7 +25,6 @@ namespace stackoverflow
         public string Email { get; set; }
 
         [Required]
-        [StringLength(64)]
         public string Password { get; set; }
 
         [StringLength(50)]
