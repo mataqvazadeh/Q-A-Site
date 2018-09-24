@@ -1,2 +1,3 @@
 # stackoverflow
-My StackOverFlow sample with ASP.NET
+
+My Q&A site, inspired by [StackOverflow](www.stackoverflow.com), developed with ASP.NET
