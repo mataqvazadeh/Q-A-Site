@@ -21,26 +21,40 @@ namespace stackoverflow.Controllers
         private QAContext db = new QAContext();
 
         [Route("register"), HttpPost]
-        [ResponseType(typeof(UserRegisterDTO))]
-        public IHttpActionResult RegisterUser(UserRegisterDTO registerdUser)
+        [ResponseType(typeof(UserSignUpOrSignInDTO))]
+        public IHttpActionResult RegisterUser(UserSignUpOrSignInDTO registerdUser)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if(registerdUser.Password != registerdUser.PasswordConfirm)
+            if( registerdUser.ConfirmPassword == null || registerdUser.Password != registerdUser.ConfirmPassword)
             {
-                return BadRequest("Password and Confirmation Mismatched!");
+                return BadRequest("Password does not match the confirm password.");
             }
 
-            User user = new User();
+            User user = db.Users.Where(u => u.Email == registerdUser.Email).SingleOrDefault();
+
+            if( user != null )
+            {
+                return BadRequest("Email Address Duplicated.");
+            }
+
+            user = new User();
             user.Email = registerdUser.Email;
             user.Password = PasswordEncryptor.ComputeHash(registerdUser.Password);
             user.RegisterDate = DateTime.Now;
 
-            db.Users.Add(user);
-            db.SaveChanges();
+            try
+            {
+                db.Users.Add(user);
+                db.SaveChanges();
+            }
+            catch(DbUpdateException)
+            {
+                return BadRequest("There was a problem. Please try again.");
+            }
 
             return Ok();
         }

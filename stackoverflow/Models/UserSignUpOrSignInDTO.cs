@@ -6,7 +6,7 @@ using System.Web;
 
 namespace stackoverflow.Models
 {
-    public class UserRegisterDTO
+    public class UserSignUpOrSignInDTO
     {
         [Required]
         [StringLength(50)]
@@ -18,9 +18,8 @@ namespace stackoverflow.Models
             ErrorMessage = "Password must has minimum 8 characters, at least one uppercase letter, one lowercase letter and one number.")]
         public string Password { get; set; }
 
-        [Required]
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$",
             ErrorMessage = "Password must has minimum 8 characters, at least one uppercase letter, one lowercase letter and one number.")]
-        public string PasswordConfirm { get; set; }
+        public string ConfirmPassword { get; set; }
     }
 }
