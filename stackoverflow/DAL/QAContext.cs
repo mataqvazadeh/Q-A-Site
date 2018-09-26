@@ -26,14 +26,6 @@ namespace stackoverflow
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<User>()
-                .Property(e => e.Email)
-                .IsFixedLength();
-
-            modelBuilder.Entity<User>()
-                .Property(e => e.Password)
-                .IsFixedLength();
-
-            modelBuilder.Entity<User>()
                 .HasMany(e => e.Answers)
                 .WithRequired(e => e.User)
                 .HasForeignKey(e => e.AuthorId)
