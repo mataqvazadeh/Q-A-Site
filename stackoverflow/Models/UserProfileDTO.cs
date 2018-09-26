@@ -15,7 +15,7 @@ namespace stackoverflow.Models
             Questions = new HashSet<Question>();
         }
 
-        public int Id { get; }
+        public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
@@ -28,9 +28,9 @@ namespace stackoverflow.Models
         [StringLength(50)]
         public string LastName { get; set; }
 
-        public DateTime RegisterDate { get; }
+        public DateTime RegisterDate { get; set; }
 
-        public DateTime? LastLogin { get; }
+        public DateTime? LastLogin { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answer> Answers { get; set; }

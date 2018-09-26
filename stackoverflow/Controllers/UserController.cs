@@ -22,19 +22,19 @@ namespace stackoverflow.Controllers
 
         [Route("register"), HttpPost]
         [ResponseType(typeof(UserSignUpOrSignInDTO))]
-        public IHttpActionResult RegisterUser(UserSignUpOrSignInDTO registerdUser)
+        public IHttpActionResult RegisterUser(UserSignUpOrSignInDTO registrationData)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if( registerdUser.ConfirmPassword == null || registerdUser.Password != registerdUser.ConfirmPassword)
+            if( registrationData.ConfirmPassword == null || registrationData.Password != registrationData.ConfirmPassword)
             {
                 return BadRequest("Password does not match the confirm password.");
             }
 
-            User user = db.Users.Where(u => u.Email == registerdUser.Email).SingleOrDefault();
+            User user = db.Users.Where(u => u.Email == registrationData.Email).SingleOrDefault();
 
             if( user != null )
             {
@@ -42,8 +42,8 @@ namespace stackoverflow.Controllers
             }
 
             user = new User();
-            user.Email = registerdUser.Email;
-            user.Password = PasswordEncryptor.ComputeHash(registerdUser.Password);
+            user.Email = registrationData.Email;
+            user.Password = PasswordEncryptor.ComputeHash(registrationData.Password);
             user.RegisterDate = DateTime.Now;
 
             try
@@ -57,6 +57,58 @@ namespace stackoverflow.Controllers
             }
 
             return Ok();
+        }
+
+        [Route("login"), HttpPost]
+        [ResponseType(typeof(UserProfileDTO))]
+        public IHttpActionResult LoginUser(UserSignUpOrSignInDTO loginData)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            User user = db.Users.Where(u => u.Email == loginData.Email)
+                .Include( u => u.Questions )
+                .Include( u => u.Answers )
+                .Include( u => u.Comments )
+                .SingleOrDefault();
+
+            if( user == null )
+            {
+                return NotFound();
+            }
+
+            if( !PasswordEncryptor.VerifyHash(loginData.Password, user.Password) )
+            {
+                return BadRequest("Password is wrong.");
+            }
+
+            user.LastLogin = DateTime.Now;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+                return BadRequest("There was a problem. Please try again.");
+            }
+
+            UserProfileDTO userProfile = new UserProfileDTO
+            {
+                Id = user.Id,
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                RegisterDate = user.RegisterDate,
+                LastLogin = user.LastLogin,
+                Questions = user.Questions,
+                Answers = user.Answers,
+                Comments = user.Comments
+            };
+
+            return Ok(userProfile);
         }
 
         protected override void Dispose(bool disposing)
