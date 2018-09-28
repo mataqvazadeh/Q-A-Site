@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace stackoverflow.Models
+namespace QASite.Models
 {
     public class UserSignUpOrSignInDTO
     {

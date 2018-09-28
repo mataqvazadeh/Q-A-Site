@@ -9,11 +9,11 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Web.Http;
 using System.Web.Http.Description;
-using stackoverflow;
-using stackoverflow.Models;
-using stackoverflow.Helper;
+using QASite;
+using QASite.Models;
+using QASite.Helper;
 
-namespace stackoverflow.Controllers
+namespace QASite.Controllers
 {
     [RoutePrefix("api/v1/user")]
     public class UserController : ApiController

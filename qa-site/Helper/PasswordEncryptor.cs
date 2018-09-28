@@ -6,7 +6,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
-namespace stackoverflow.Helper
+namespace QASite.Helper
 {
     public class PasswordEncryptor
     {

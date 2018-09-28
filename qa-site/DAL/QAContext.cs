@@ -1,4 +1,4 @@
-namespace stackoverflow
+namespace QASite
 {
     using System;
     using System.Data.Entity;

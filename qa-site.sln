@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "stackoverflow", "stackoverflow\stackoverflow.csproj", "{46ADE7D5-CC5A-4637-900C-6CAA4745C847}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "qa-site", "qa-site\qa-site.csproj", "{46ADE7D5-CC5A-4637-900C-6CAA4745C847}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

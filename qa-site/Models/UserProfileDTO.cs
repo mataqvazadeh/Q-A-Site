@@ -1,31 +1,26 @@
-namespace stackoverflow
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
 
-    [Table("User")]
-    public partial class User
+namespace QASite.Models
+{
+    public class UserProfileDTO
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public UserProfileDTO()
         {
             Answers = new HashSet<Answer>();
             Comments = new HashSet<Comment>();
             Questions = new HashSet<Question>();
-            Votes = new HashSet<Vote>();
         }
 
         public int Id { get; set; }
 
         [Required]
         [StringLength(50)]
+        [EmailAddress]
         public string Email { get; set; }
-
-        [Required]
-        public string Password { get; set; }
 
         [StringLength(50)]
         public string FirstName { get; set; }
@@ -45,8 +40,5 @@ namespace stackoverflow
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Question> Questions { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Vote> Votes { get; set; }
     }
 }
