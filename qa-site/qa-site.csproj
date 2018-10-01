@@ -98,6 +98,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\QuestionController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Helper\PasswordEncryptor.cs" />
     <Compile Include="Models\Answer.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\QuestionFormDTO.cs" />
     <Compile Include="Models\UserProfileDTO.cs" />
     <Compile Include="Models\UserSignUpOrSignInDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
