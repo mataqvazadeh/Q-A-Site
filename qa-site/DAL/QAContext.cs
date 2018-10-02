@@ -4,8 +4,9 @@ namespace QASite
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
-    public partial class QAContext : DbContext
+    public partial class QAContext : IdentityDbContext<User>
     {
         public QAContext()
             : base("name=QAContext")
@@ -15,7 +16,7 @@ namespace QASite
         public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<Comment> Comments { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        //public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vote> Votes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

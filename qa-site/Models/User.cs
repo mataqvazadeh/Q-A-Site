@@ -1,5 +1,6 @@
 namespace QASite
 {
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ namespace QASite
     using System.Data.Entity.Spatial;
 
     [Table("User")]
-    public partial class User
+    public partial class User : IdentityUser
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
@@ -17,15 +18,6 @@ namespace QASite
             Questions = new HashSet<Question>();
             Votes = new HashSet<Vote>();
         }
-
-        public int Id { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Email { get; set; }
-
-        [Required]
-        public string Password { get; set; }
 
         [StringLength(50)]
         public string FirstName { get; set; }

@@ -6,7 +6,7 @@ using System.Web;
 
 namespace QASite.Models
 {
-    public class UserSignUpOrSignInDTO
+    public class UserRegisterDTO
     {
         [Required]
         [StringLength(50)]
@@ -20,6 +20,7 @@ namespace QASite.Models
 
         [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$",
             ErrorMessage = "Password must has minimum 8 characters, at least one uppercase letter, one lowercase letter and one number.")]
+        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
     }
 }

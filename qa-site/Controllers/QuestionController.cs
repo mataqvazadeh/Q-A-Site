@@ -18,7 +18,7 @@ namespace QASite.Controllers
     {
         private QAContext db = new QAContext();
 
-        [HttpPost]
+        [Route(""), HttpPost]
         [ResponseType(typeof(Question))]
         public IHttpActionResult AskQusetion(QuestionFormDTO questionForm)
         {
